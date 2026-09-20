@@ -3,7 +3,8 @@
 Pick a state, district, crop and month, enter the weather, and get the three most likely pests
 with a confidence score and crop protection advice.
 
-**Live demo:** _paste your Render URL here_  ·  **API docs:** `<your-url>/docs`
+**Live demo:** _paste your Render URL here_  ·**Frontend:** 'https://pest-advisory.onrender.com'     
+**API docs:** `https://pest-advisory.onrender.com/docs`
 
 ## How it works
 - **Data:** NPSS pest occurrence records + India weather and rainfall data, merged by state, district and month
