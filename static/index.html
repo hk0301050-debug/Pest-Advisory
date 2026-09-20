@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pest Advisory: weather-based pest prediction for Indian crops</title>
+  <meta name="description" content="Predict the most likely pests for your crop, district and month from local weather, with crop protection advice.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>Pest Advisory</h1>
+      <p>Find out which pests are most likely on your crop this month, based on local weather.</p>
+    </div>
+    <p id="status" class="status" role="status">Connecting…</p>
+  </header>
+
+  <main class="layout">
+    <form id="form" class="form" novalidate>
+      <fieldset>
+        <legend>Field</legend>
+        <div class="grid three">
+          <label>State <select id="state" required></select></label>
+          <label>District <select id="district" required></select></label>
+          <label>Crop <select id="crop" required></select></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Month</legend>
+        <div id="months" class="months" role="group" aria-label="Month"></div>
+        <label class="season">Season <select id="season"></select></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Weather this month</legend>
+        <div class="grid three">
+          <label>Average temperature <span class="unit"><input id="avg_temp" type="number" step="0.1" min="-30" max="60" required><i>°C</i></span></label>
+          <label>Lowest temperature <span class="unit"><input id="min_temp" type="number" step="0.1" min="-30" max="60" required><i>°C</i></span></label>
+          <label>Highest temperature <span class="unit"><input id="max_temp" type="number" step="0.1" min="-30" max="60" required><i>°C</i></span></label>
+          <label>Rainfall <span class="unit"><input id="rainfall" type="number" step="1" min="0" max="5000" required><i>mm</i></span></label>
+          <label>Wind speed <span class="unit"><input id="wind_speed" type="number" step="0.1" min="0" max="200" required><i>km/h</i></span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Previous three months</legend>
+        <label class="check"><input id="sameLags" type="checkbox" checked> Use this month’s weather for the previous months</label>
+        <div id="lagTable" class="lags" hidden>
+          <span></span><b>Temp (°C)</b><b>Rain (mm)</b><b>Wind (km/h)</b>
+        </div>
+        <p class="hint">Past weather shows the trend the model looks at. Enter real values for better results.</p>
+      </fieldset>
+
+      <div class="actions">
+        <button id="submit" class="primary" type="submit">Predict pests</button>
+        <button id="example" class="ghost" type="button">Fill an example</button>
+      </div>
+    </form>
+
+    <section id="results" class="results" aria-live="polite">
+      <div class="empty">
+        <h2>Your prediction will appear here</h2>
+        <p>Choose a location and crop, enter this month’s weather, and you will see the three most likely pests, how strong the signal is, and what to do about each.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">Built with a Random Forest model trained on NPSS pest records and India weather data.</footer>
+  <script src="/static/script.js"></script>
+</body>
+</html>
